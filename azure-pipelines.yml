@@ -10,18 +10,23 @@ stages:
   - job: FirstJob
     steps:
     - bash: echo Build FirstJob
+    - bash: echo ${piplineLevelVariable}
   - job: SecondJob
     steps:
     - bash: echo Build FirstJob  
 - stage: DevDeploy
+  variables:
+    environment: Dev
   jobs:
   - job: FirstJob
     steps:
-    - bash: echo deploy DevDeploy
+    - bash: echo deploy $(environment Deploy
 - stage: ProdDeploy
+  variables:
+    environment: Prod
   jobs:
   - job: FirstJob
     steps:
-    - bash: echo deploy ProdDeploy
+    - bash: echo deploy  $(environment) Deploy
     - bash: echo deploy ProdDeploy step2
   
