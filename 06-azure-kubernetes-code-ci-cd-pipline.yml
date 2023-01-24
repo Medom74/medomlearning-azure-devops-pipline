@@ -5,7 +5,7 @@ resources:
 - repo: self
 
 variables:
-  tag: 23 #'$(Build.BuildId)'
+  tag: '$(Build.BuildId)'
 # stage1 : Build the docker image and publish the K8S Files
 stages:
 - stage: Build 
@@ -16,13 +16,13 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    #- task: Docker@2  # Build the docker images
-     # inputs:
-      #  containerRegistry: 'Docker hub'
-       # repository: 'mohamedomri/medomlearning'
-       # command: 'buildAndPush'
-       # Dockerfile: '**/Dockerfile'
-       # tags: '$(tag)'
+    - task: Docker@2  # Build the docker images
+      inputs:
+        containerRegistry: 'Docker hub'
+        repository: 'mohamedomri/medomlearning'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
         
     - task: PublishBuildArtifacts@1 #Publish the K8S Files
       inputs:
